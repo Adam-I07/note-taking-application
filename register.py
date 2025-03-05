@@ -12,13 +12,17 @@ class Register():
         print("Register")
         print("---------------------")
         username_inputted = self.username_input()
+        if username_inputted == 'b':
+            return
         password_inputted = self.password_input()
+        if password_inputted == 'b':
+                return
         self.user_json_handling_instance.register_user(f"{username_inputted},{password_inputted}")
         return
 
     def password_input(self):
         while True:
-            user_input = input("Password: ")
+            user_input = input("Password, enter 'b' to return to main menu: ")
             has_input_error = False
             has_length_error = False
             has_uppercase_error = False
@@ -49,7 +53,9 @@ class Register():
                 special_char_check = self.user_validation_instance.check_password_special_character(user_input)
                 if special_char_check is False: has_special_character_error = True
 
-            if has_input_error is True:
+            if user_input.lower() == 'b':
+                return 'b'
+            elif has_input_error is True:
                 print(Fore.RED + "You must input a valid password!" + Fore.WHITE)
             elif has_length_error is True:
                 print(Fore.RED + "Password must be a minimum of 7 letters long!" + Fore.WHITE)
@@ -67,7 +73,7 @@ class Register():
 
     def username_input(self):
         while True:
-            user_input = input("Username: ")
+            user_input = input("Username, enter 'b' to return to main menu: ")
             input_to_check = user_input.lower()
             has_input_error = False
             already_exists_error = False
@@ -84,7 +90,9 @@ class Register():
                 username_length = self.user_validation_instance.check_username_length(input_to_check)
                 if username_length is False: length_error = True
 
-            if has_input_error is True:
+            if user_input.lower() == 'b':
+                return 'b'
+            elif has_input_error is True:
                 print(Fore.RED + "You must input a valid username!" + Fore.WHITE)
             elif already_exists_error is True:
                 print(Fore.RED + "Username already exists try again!" + Fore.WHITE)
