@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "username": "user",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$k/4I53MHp6z0M4wF1UVnfw$ov8/5l8eeKDuOsPuxOc6SDgIbgsFRxLvZCm+ynGIQgY"
+    },
+    {
+        "id": 2,
+        "username": "user2",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$kHv9QmH4OVdFWNmP+uG1LQ$csHJwwhOrTqynmIiiQMd7it9NqmXbs+tZQ9zGZbX+Rc"
+    },
+    {
+        "id": 3,
+        "username": "user3",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$DVf1OyCeRhDkr3dtAs2ttQ$ZtNZNHn/Tl9ozRQfs1NBzVdU7KdOAgZSC3aRK2awipM"
+    }
+]
