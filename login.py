@@ -1,5 +1,6 @@
 import user_validation
 import user_json_handling
+import notes_interface
 from colorama import Fore
 
 class Login():
@@ -29,8 +30,10 @@ class Login():
                 if extra_information == 'username':
                     print(Fore.RED + "Invalid Username Try Again" + Fore.WHITE)
             else:
+                print("---------------------")
                 print(Fore.GREEN + "Successfully Logged In!" + Fore.WHITE)
-                print(extra_information)
+                notes_interface_instance = notes_interface.NotesInterface()
+                notes_interface_instance.logged_in(extra_information)
                 return
 
 
