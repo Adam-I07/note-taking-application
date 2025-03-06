@@ -18,6 +18,8 @@ class Register():
         if password_inputted == 'b':
                 return
         self.user_json_handling_instance.register_user(f"{username_inputted},{password_inputted}")
+        print("---------------------")
+        print(f"{username_inputted} successfully registered!")
         return
 
     def password_input(self):
