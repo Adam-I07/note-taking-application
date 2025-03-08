@@ -1,0 +1,366 @@
+[
+    {
+        "id": 1,
+        "user_id": "1",
+        "title": "Meeting Notes",
+        "content": "Discussed project timelines and deliverables for Q4.",
+        "tags": [
+            "work",
+            "urgent"
+        ],
+        "created_at": "01/10/2024 10:00:02",
+        "updated_at": "01/10/2024 10:00:02"
+    },
+    {
+        "id": 2,
+        "user_id": 2,
+        "title": "Grocery List",
+        "content": "Milk, eggs, bread, bananas, and coffee.",
+        "tags": [
+            "personal",
+            "shopping"
+        ],
+        "created_at": "02/03/2025 15:30:45",
+        "updated_at": "02/03/2025 15:30:45"
+    },
+    {
+        "id": 3,
+        "user_id": "3",
+        "title": "Vacation Ideas",
+        "content": "Planning a trip to Japan next year. Places to visit: Tokyo, Kyoto, Osaka.",
+        "tags": [
+            "travel",
+            "ideas"
+        ],
+        "created_at": "03/07/2024 12:00:22",
+        "updated_at": "03/07/2024 12:00:22"
+    },
+    {
+        "id": 4,
+        "user_id": "4",
+        "title": "Workout Plan",
+        "content": "Monday: Cardio, Tuesday: Strength training, Wednesday: Yoga.",
+        "tags": [
+            "health"
+        ],
+        "created_at": "04/12/2025 08:00:15",
+        "updated_at": "04/12/2025 08:00:15"
+    },
+    {
+        "id": 5,
+        "user_id": "1",
+        "title": "Project Ideas",
+        "content": "Brainstorming ideas for the new marketing campaign.",
+        "tags": [
+            "work",
+            "ideas"
+        ],
+        "created_at": "05/05/2024 14:00:30",
+        "updated_at": "05/05/2024 14:00:30"
+    },
+    {
+        "id": 6,
+        "user_id": "2",
+        "title": "Budget Planning",
+        "content": "Monthly budget for groceries, utilities, and entertainment.",
+        "tags": [
+            "finance",
+            "important"
+        ],
+        "created_at": "06/09/2025 09:00:10",
+        "updated_at": "06/09/2025 09:00:10"
+    },
+    {
+        "id": 7,
+        "user_id": "3",
+        "title": "Study Schedule",
+        "content": "Plan for studying for the upcoming exams.",
+        "tags": [
+            "school",
+            "todo"
+        ],
+        "created_at": "07/11/2024 16:00:05",
+        "updated_at": "07/11/2024 16:00:05"
+    },
+    {
+        "id": 8,
+        "user_id": "4",
+        "title": "Recipe: Pasta",
+        "content": "Ingredients: pasta, tomato sauce, garlic, basil. Steps: boil pasta, mix sauce.",
+        "tags": [
+            "recipes"
+        ],
+        "created_at": "08/02/2025 18:00:20",
+        "updated_at": "08/02/2025 18:00:20"
+    },
+    {
+        "id": 9,
+        "user_id": "1",
+        "title": "Client Meeting",
+        "content": "Meeting with client XYZ to discuss project updates.",
+        "tags": [
+            "work",
+            "urgent"
+        ],
+        "created_at": "09/04/2024 11:00:00",
+        "updated_at": "09/04/2024 11:00:00"
+    },
+    {
+        "id": 10,
+        "user_id": "2",
+        "title": "Weekend Plans",
+        "content": "Planning to visit the museum and have dinner with friends.",
+        "tags": [
+            "personal",
+            "travel"
+        ],
+        "created_at": "10/06/2025 13:00:00",
+        "updated_at": "10/06/2025 13:00:00"
+    },
+    {
+        "id": 11,
+        "user_id": "3",
+        "title": "Health Checkup",
+        "content": "Schedule a health checkup for next week.",
+        "tags": [
+            "health",
+            "important"
+        ],
+        "created_at": "11/08/2024 10:00:00",
+        "updated_at": "11/08/2024 10:00:00"
+    },
+    {
+        "id": 12,
+        "user_id": "4",
+        "title": "Investment Ideas",
+        "content": "Researching stocks and mutual funds for long-term investment.",
+        "tags": [
+            "finance",
+            "ideas"
+        ],
+        "created_at": "12/01/2025 14:00:00",
+        "updated_at": "12/01/2025 14:00:00"
+    },
+    {
+        "id": 13,
+        "user_id": "1",
+        "title": "Team Building Event",
+        "content": "Planning a team-building event for the department.",
+        "tags": [
+            "work",
+            "todo"
+        ],
+        "created_at": "13/03/2024 09:00:00",
+        "updated_at": "13/03/2024 09:00:00"
+    },
+    {
+        "id": 14,
+        "user_id": "2",
+        "title": "Book Recommendations",
+        "content": "List of books to read: 'Atomic Habits', 'The Alchemist', 'Sapiens'.",
+        "tags": [
+            "personal",
+            "ideas"
+        ],
+        "created_at": "14/05/2025 17:00:00",
+        "updated_at": "14/05/2025 17:00:00"
+    },
+    {
+        "id": 15,
+        "user_id": "3",
+        "title": "Travel Itinerary",
+        "content": "Flight details and hotel bookings for the upcoming trip.",
+        "tags": [
+            "travel",
+            "urgent"
+        ],
+        "created_at": "15/07/2024 12:00:00",
+        "updated_at": "15/07/2024 12:00:00"
+    },
+    {
+        "id": 16,
+        "user_id": "4",
+        "title": "Fitness Goals",
+        "content": "Set a goal to run 5km in under 30 minutes by the end of the year.",
+        "tags": [
+            "health",
+            "todo"
+        ],
+        "created_at": "16/09/2025 08:00:00",
+        "updated_at": "16/09/2025 08:00:00"
+    },
+    {
+        "id": 17,
+        "user_id": "1",
+        "title": "Project Deadline",
+        "content": "Deadline for the new website launch is next month.",
+        "tags": [
+            "work",
+            "urgent"
+        ],
+        "created_at": "17/11/2024 14:00:00",
+        "updated_at": "17/11/2024 14:00:00"
+    },
+    {
+        "id": 18,
+        "user_id": "2",
+        "title": "Recipe: Pancakes",
+        "content": "Ingredients: flour, milk, eggs, sugar. Steps: mix ingredients, cook on a pan.",
+        "tags": [
+            "recipes"
+        ],
+        "created_at": "18/02/2025 18:00:00",
+        "updated_at": "18/02/2025 18:00:00"
+    },
+    {
+        "id": 19,
+        "user_id": "3",
+        "title": "Study Group Meeting",
+        "content": "Meeting with the study group to review the syllabus.",
+        "tags": [
+            "school",
+            "todo"
+        ],
+        "created_at": "19/04/2024 16:00:00",
+        "updated_at": "19/04/2024 16:00:00"
+    },
+    {
+        "id": 20,
+        "user_id": "4",
+        "title": "Financial Review",
+        "content": "Review monthly expenses and savings.",
+        "tags": [
+            "finance",
+            "important"
+        ],
+        "created_at": "20/06/2025 10:00:00",
+        "updated_at": "20/06/2025 10:00:00"
+    },
+    {
+        "id": 21,
+        "user_id": "1",
+        "title": "Team Lunch",
+        "content": "Organizing a team lunch for next Friday.",
+        "tags": [
+            "work",
+            "personal"
+        ],
+        "created_at": "21/08/2024 12:00:00",
+        "updated_at": "21/08/2024 12:00:00"
+    },
+    {
+        "id": 22,
+        "user_id": "2",
+        "title": "Weekend Hike",
+        "content": "Planning a hike in the mountains this weekend.",
+        "tags": [
+            "personal",
+            "travel"
+        ],
+        "created_at": "22/10/2025 09:00:00",
+        "updated_at": "22/10/2025 09:00:00"
+    },
+    {
+        "id": 23,
+        "user_id": "3",
+        "title": "Health Tips",
+        "content": "Drink more water and take regular breaks from the computer.",
+        "tags": [
+            "health"
+        ],
+        "created_at": "23/12/2024 11:00:00",
+        "updated_at": "23/12/2024 11:00:00"
+    },
+    {
+        "id": 24,
+        "user_id": "4",
+        "title": "Investment Strategy",
+        "content": "Diversify investments across stocks, bonds, and real estate.",
+        "tags": [
+            "finance",
+            "ideas"
+        ],
+        "created_at": "24/03/2025 14:00:00",
+        "updated_at": "24/03/2025 14:00:00"
+    },
+    {
+        "id": 25,
+        "user_id": "1",
+        "title": "Project Kickoff",
+        "content": "Kickoff meeting for the new project scheduled for next week.",
+        "tags": [
+            "work",
+            "urgent"
+        ],
+        "created_at": "25/05/2024 10:00:00",
+        "updated_at": "25/05/2024 10:00:00"
+    },
+    {
+        "id": 26,
+        "user_id": "2",
+        "title": "Recipe: Smoothie",
+        "content": "Ingredients: banana, spinach, almond milk, honey. Steps: blend all ingredients.",
+        "tags": [
+            "recipes"
+        ],
+        "created_at": "26/07/2025 18:00:00",
+        "updated_at": "26/07/2025 18:00:00"
+    },
+    {
+        "id": 27,
+        "user_id": "3",
+        "title": "Exam Preparation",
+        "content": "Create a study schedule for the final exams.",
+        "tags": [
+            "school",
+            "todo"
+        ],
+        "created_at": "27/09/2024 16:00:00",
+        "updated_at": "27/09/2024 16:00:00"
+    },
+    {
+        "id": 28,
+        "user_id": "4",
+        "title": "Budget Update",
+        "content": "Update the monthly budget to include new expenses.",
+        "tags": [
+            "finance",
+            "important"
+        ],
+        "created_at": "28/11/2025 10:00:00",
+        "updated_at": "28/11/2025 10:00:00"
+    },
+    {
+        "id": 29,
+        "user_id": "1",
+        "title": "Client Feedback",
+        "content": "Collect feedback from clients on the new product features.",
+        "tags": [
+            "work",
+            "urgent"
+        ],
+        "created_at": "29/01/2024 12:00:00",
+        "updated_at": "29/01/2024 12:00:00"
+    },
+    {
+        "id": 30,
+        "user_id": "2",
+        "title": "Weekend Getaway",
+        "content": "Planning a weekend getaway to the beach.",
+        "tags": [
+            "personal",
+            "travel"
+        ],
+        "created_at": "30/04/2025 09:00:00",
+        "updated_at": "30/04/2025 09:00:00"
+    },
+    {
+        "id": 31,
+        "user_id": "1",
+        "title": "Car Maintanance",
+        "content": "Sent car for maintanance today and need to collect on tuesday and pay \u00a3150.",
+        "tags": null,
+        "created_at": "08/03/2025 22:29:54",
+        "updated_at": "08/03/2025 22:29:54"
+    }
+]

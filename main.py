@@ -1,6 +1,6 @@
 from colorama import Fore
-import login
-import register
+import user_handling.login as login
+import user_handling.register as register
 
 class Start():
     def __init__(self):

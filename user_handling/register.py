@@ -1,5 +1,5 @@
-import user_validation
-import user_json_handling
+import user_handling.user_validation as user_validation
+import user_handling.user_json_handling as user_json_handling
 from colorama import Fore
 
 class Register():

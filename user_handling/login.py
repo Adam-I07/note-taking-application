@@ -1,6 +1,6 @@
-import user_validation
-import user_json_handling
-import notes_interface
+import user_handling.user_validation as user_validation
+import user_handling.user_json_handling as user_json_handling
+import notes_application.notes_interface as notes_interface
 from colorama import Fore
 
 class Login():
