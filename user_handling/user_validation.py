@@ -1,4 +1,4 @@
-import user_json_handling
+import user_handling.user_json_handling as user_json_handling
 class UserValidation():
     def __init__(self):
         self.user_json_handling_instance = user_json_handling.UserJsonHandling()

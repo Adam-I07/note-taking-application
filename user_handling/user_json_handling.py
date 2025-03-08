@@ -1,5 +1,5 @@
 import json
-import password_hashing
+import user_handling.password_hashing as password_hashing
 
 class UserJsonHandling():
     def __init__(self):
@@ -11,7 +11,7 @@ class UserJsonHandling():
             self.user_data.clear()
         except:
             pass
-        with open('users.json') as f:
+        with open('user_handling/users.json') as f:
             self.user_data = json.load(f)
 
     def check_username(self, username_given):
@@ -35,7 +35,7 @@ class UserJsonHandling():
     
     def register(self, details):
         self.user_data.append(details)
-        with open('users.json', 'w') as f:
+        with open('user_handling/users.json', 'w') as f:
             json.dump(self.user_data, f, indent=4)
         
     def login(self, details):
