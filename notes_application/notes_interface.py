@@ -20,7 +20,7 @@ class NotesInterface():
             elif user_option == "3":
                 print("View Notes")
                 self.view_note_instance = notes_application.view_notes.ViewNotes()
-                self.view_note_instance.view_note()
+                self.view_note_instance.view_note(self.logged_in_user)
                 self.menu_options()
             elif user_option == "4":
                 print("Delete Note")

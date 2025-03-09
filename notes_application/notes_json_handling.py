@@ -12,6 +12,15 @@ class NotesJsonHandling():
         with open('notes_application/notes.json') as f:
                 self.existing_notes = json.load(f)
     
+    def get_display_user_notes(self, user_id):
+        self.get_data()
+        logged_in_user_notes = []
+        for note in self.existing_notes:
+            if note["user_id"] is int(user_id):
+                logged_in_user_notes.append(note)
+        print(logged_in_user_notes)
+        return logged_in_user_notes
+    
     def check_title(self, input):
         self.get_data()
         for note in self.existing_notes:
