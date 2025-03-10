@@ -5,13 +5,38 @@ class NotesValidation():
     def __init__(self):
         self.notes_json_handling_instance = notes_application.notes_json_handling.NotesJsonHandling()
 
+    def select_note_to_delete(self, user_logged_in):
+        notes_can_be_deleted_id = self.notes_json_handling_instance.get_delete_notes_id(user_logged_in)
+        while True:
+            user_input = input("Enter the id of the note you would like to delete: ")
+            check_input_type = self.check_user_input_type(user_input)
+            if check_input_type == "int":
+                if int(user_input) in notes_can_be_deleted_id:
+                    self.confirm_delete(user_input)
+                    return
+                else:
+                    print(Fore.RED + "You have entered an invalid ID! Try again!" + Fore.WHITE)
+            else:
+                print(Fore.RED + "Invalid input you can only enter a valid note ID! Try again!" + Fore.WHITE)
+    
+    def confirm_delete(self, delete_note_id):
+        while True:
+            user_final_choice = input(f"Are you sure you would permanently delete note {delete_note_id}? (y/n) ")
+            if user_final_choice.lower() == 'y':
+                self.notes_json_handling_instance.delete_note(delete_note_id)
+                print(Fore.GREEN + f"{delete_note_id} has been deleted successfully!" + Fore.WHITE)
+                return
+            elif user_final_choice.lower() == 'n':
+                return
+            else:
+                print(Fore.RED + "Invalid Input, you can only enter y for yes or n for no! Try Again!" + Fore.WHITE)
 
     def confirm_save(self):
         while True:
             user_choice = input("Are you sure you would like to add this note (y/n): ")
             if user_choice.lower() == 'y':
                 return True
-            elif user_choice.lower == 'n':
+            elif user_choice.lower() == 'n':
                 return False
             else:
                 print(Fore.RED + "Invalid Input! You can only enter y for yes or n for no! Try Again!"+ Fore.WHITE)
@@ -45,7 +70,7 @@ class NotesValidation():
         self.tag_options()
         tags = self.select_tags()
         selected_tags = self.return_tags(tags)
-        print(selected_tags)
+        return selected_tags
 
 
     def select_tags(self):

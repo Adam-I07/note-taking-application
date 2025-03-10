@@ -18,7 +18,6 @@ class NotesJsonHandling():
         for note in self.existing_notes:
             if note["user_id"] is int(user_id):
                 logged_in_user_notes.append(note)
-        print(logged_in_user_notes)
         return logged_in_user_notes
     
     def check_title(self, input):
@@ -31,6 +30,25 @@ class NotesJsonHandling():
     def add_new_note(self, to_add):
         self.get_data()
         self.existing_notes.append(to_add)
+        with open('notes_application/notes.json', 'w') as f:
+            json.dump(self.existing_notes, f, indent=4)
+    
+    def get_delete_notes_id(self, user_id):
+        self.get_data()
+        notes_can_be_deleted = []
+        for note in self.existing_notes:
+            if note['user_id'] == int(user_id):
+                notes_can_be_deleted.append(note['id'])
+        return notes_can_be_deleted
+
+    def delete_note(self, note_id):
+        self.get_data()
+        for note in self.existing_notes:
+            if note['id'] == int(note_id):
+                self.existing_notes.remove(note)
+                self.save_note()
+    
+    def save_note(self):
         with open('notes_application/notes.json', 'w') as f:
             json.dump(self.existing_notes, f, indent=4)
 

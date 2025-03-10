@@ -362,5 +362,18 @@
         "tags": null,
         "created_at": "08/03/2025 22:29:54",
         "updated_at": "08/03/2025 22:29:54"
+    },
+    {
+        "id": 33,
+        "user_id": 2,
+        "title": "dwdfdjfn fmrklfmer",
+        "content": "d,kefmklrmf frkmlrfme",
+        "tags": [
+            "travel",
+            "done",
+            "personal"
+        ],
+        "created_at": "09/03/2025 17:37:24",
+        "updated_at": "09/03/2025 17:37:24"
     }
 ]

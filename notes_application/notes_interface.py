@@ -1,6 +1,7 @@
 from colorama import Fore
 import notes_application.add_note
 import notes_application.view_notes
+import notes_application.delete_note
 
 class NotesInterface():
     def __init__(self):
@@ -23,7 +24,9 @@ class NotesInterface():
                 self.view_note_instance.view_note(self.logged_in_user)
                 self.menu_options()
             elif user_option == "4":
-                print("Delete Note")
+                self.delete_note_instance = notes_application.delete_note.DeleteNote()
+                self.delete_note_instance.delete_note(self.logged_in_user)
+                self.menu_options()
             elif user_option == "5":
                 print("Filter Notes")
             elif user_option == "6":
