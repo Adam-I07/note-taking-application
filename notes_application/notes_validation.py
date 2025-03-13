@@ -1,14 +1,42 @@
 from colorama import Fore
 import notes_application.notes_json_handling
+from tabulate import tabulate
 
 class NotesValidation():
     def __init__(self):
         self.notes_json_handling_instance = notes_application.notes_json_handling.NotesJsonHandling()
 
-    def select_note_to_delete(self, user_logged_in):
-        notes_can_be_deleted_id = self.notes_json_handling_instance.get_delete_notes_id(user_logged_in)
+    def select_note_to_edit(self, user_logged_in):
+        notes_can_be_edited = self.notes_json_handling_instance.get_user_specific_notes_id(user_logged_in)
         while True:
-            user_input = input("Enter the id of the note you would like to delete: ")
+            user_input = input("Enter the id of the note you would like to edit, or 'b' to go back to Main Menu: ")
+            check_input_type = self.check_user_input_type(user_input)
+            if check_input_type == "int":
+                if int(user_input) in notes_can_be_edited:
+                    note = self.notes_json_handling_instance.get_specific_note(int(user_input))
+                    return note
+                else:
+                    print(Fore.RED + "You have entered an invalid ID! Try again!" + Fore.WHITE)
+            else:
+                if user_input.lower() == 'b':
+                    return "back"
+                else:
+                    print(Fore.RED + "Invalid input you can only enter a valid note ID or 'b' to go back! Try again!" + Fore.WHITE)
+        
+    def confirm_edit(self):
+        while True:
+            user_choice = input("Are you sure you would like to edit this note (y/n): ")
+            if user_choice.lower() == 'y':
+                return True
+            elif user_choice.lower() == 'n':
+                return False
+            else:
+                print(Fore.RED + "Invalid Input! You can only enter y for yes or n for no! Try Again!"+ Fore.WHITE)
+
+    def select_note_to_delete(self, user_logged_in):
+        notes_can_be_deleted_id = self.notes_json_handling_instance.get_user_specific_notes_id(user_logged_in)
+        while True:
+            user_input = input("Enter the id of the note you would like to delete, or 'b' to go back to Main Menu: ")
             check_input_type = self.check_user_input_type(user_input)
             if check_input_type == "int":
                 if int(user_input) in notes_can_be_deleted_id:
@@ -17,7 +45,10 @@ class NotesValidation():
                 else:
                     print(Fore.RED + "You have entered an invalid ID! Try again!" + Fore.WHITE)
             else:
-                print(Fore.RED + "Invalid input you can only enter a valid note ID! Try again!" + Fore.WHITE)
+                if user_input.lower() == 'b':
+                    return "back"
+                else:
+                    print(Fore.RED + "Invalid input you can only enter a valid note ID or 'b' to go back! Try again!" + Fore.WHITE)
     
     def confirm_delete(self, delete_note_id):
         while True:
@@ -72,7 +103,6 @@ class NotesValidation():
         selected_tags = self.return_tags(tags)
         return selected_tags
 
-
     def select_tags(self):
         tags = []
         while True:
@@ -126,6 +156,9 @@ class NotesValidation():
             to_return.append(tag_options[index])
         return to_return
 
-
-        
+    def create_table(self, data):
+        try:
+            print(tabulate(data, headers='keys', tablefmt='grid'))
+        except:
+            print(Fore.RED + "Error, Could not create table from given data!" + Fore.WHITE)
 

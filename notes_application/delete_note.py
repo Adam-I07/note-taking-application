@@ -8,5 +8,7 @@ class DeleteNote():
 
     def delete_note(self, user_logged_in):
         self.view_notes_instance.view_note(user_logged_in)
-        self.notes_validation_instance.select_note_to_delete(user_logged_in)
+        delete = self.notes_validation_instance.select_note_to_delete(user_logged_in)
+        if delete == 'back':
+            return
         
