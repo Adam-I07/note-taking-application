@@ -32,14 +32,30 @@ class NotesJsonHandling():
         self.existing_notes.append(to_add)
         with open('notes_application/notes.json', 'w') as f:
             json.dump(self.existing_notes, f, indent=4)
+
+    def edit_note(self, edit_note):
+        self.get_data()
+        for note in self.existing_notes:
+            if note['id'] == edit_note['id']:
+                note['title'] = edit_note['title']
+                note['content'] = edit_note['content']
+                note['tags'] = edit_note['tags']
+                note['updated_at'] = edit_note ['updated_at']
+        self.save_note()
     
-    def get_delete_notes_id(self, user_id):
+    def get_user_specific_notes_id(self, user_id):
         self.get_data()
         notes_can_be_deleted = []
         for note in self.existing_notes:
             if note['user_id'] == int(user_id):
                 notes_can_be_deleted.append(note['id'])
         return notes_can_be_deleted
+    
+    def get_specific_note(self, note_id):
+        self.get_data()
+        for note in self.existing_notes:
+            if note["id"] == note_id:
+                return note
 
     def delete_note(self, note_id):
         self.get_data()

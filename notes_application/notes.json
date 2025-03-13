@@ -359,9 +359,12 @@
         "user_id": 1,
         "title": "Car Maintanance",
         "content": "Sent car for maintanance today and need to collect on tuesday and pay \u00a3150.",
-        "tags": null,
+        "tags": [
+            "todo",
+            "personal"
+        ],
         "created_at": "08/03/2025 22:29:54",
-        "updated_at": "08/03/2025 22:29:54"
+        "updated_at": "13/03/2025 11:05:08"
     },
     {
         "id": 33,
@@ -375,5 +378,18 @@
         ],
         "created_at": "09/03/2025 17:37:24",
         "updated_at": "09/03/2025 17:37:24"
+    },
+    {
+        "id": 32,
+        "user_id": 1,
+        "title": "something new",
+        "content": "wkefjnwkejrnf",
+        "tags": [
+            "personal",
+            "travel",
+            "school"
+        ],
+        "created_at": "13/03/2025 10:56:24",
+        "updated_at": "13/03/2025 11:04:19"
     }
 ]

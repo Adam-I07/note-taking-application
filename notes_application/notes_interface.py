@@ -2,6 +2,7 @@ from colorama import Fore
 import notes_application.add_note
 import notes_application.view_notes
 import notes_application.delete_note
+import notes_application.edit_note
 
 class NotesInterface():
     def __init__(self):
@@ -17,9 +18,10 @@ class NotesInterface():
                 self.add_note_instance.add_new_note(self.logged_in_user)
                 self.menu_options()
             elif user_option == "2":
-                print("Edit Note")
+                self.edit_note_instance = notes_application.edit_note.EditNote()
+                self.edit_note_instance.edit_note(self.logged_in_user)
+                self.menu_options()
             elif user_option == "3":
-                print("View Notes")
                 self.view_note_instance = notes_application.view_notes.ViewNotes()
                 self.view_note_instance.view_note(self.logged_in_user)
                 self.menu_options()
