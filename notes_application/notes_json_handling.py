@@ -43,6 +43,22 @@ class NotesJsonHandling():
                 note['updated_at'] = edit_note ['updated_at']
         self.save_note()
     
+    def filter_by_tag(self, tag_selected, logged_in_user):
+        self.get_data()
+        data = []
+        for note in self.existing_notes:
+            if tag_selected in note['tags'] and note['user_id'] is int(logged_in_user):
+                data.append(note)
+        return data
+
+    def filter_by_phrase(self, word, filter_choice, logged_in_user):
+        self.get_data()
+        notes = []
+        for note in self.existing_notes:
+            if word in note[filter_choice] and note['user_id'] is int(logged_in_user):
+                notes.append(note)
+        return notes
+
     def get_user_specific_notes_id(self, user_id):
         self.get_data()
         notes_can_be_deleted = []
@@ -56,6 +72,46 @@ class NotesJsonHandling():
         for note in self.existing_notes:
             if note["id"] == note_id:
                 return note
+            
+    def get_specific_notes_by_years(self, date, logged_in_user):
+        self.get_data()
+        notes = []
+        for note in self.existing_notes:
+            dates = note['created_at'].split(" ")
+            split_date = dates[0].split("/")
+            if split_date[2] in date and note['user_id'] is int(logged_in_user):
+                notes.append(note)
+        return notes
+        
+    def get_specific_notes_by_month(self, date, logged_in_user):
+        self.get_data()
+        notes = []
+        for note in self.existing_notes:
+            dates = note['created_at'].split(" ")
+            split_date = dates[0].split("/")
+            month = f"{split_date[1]}/{split_date[2]}"
+            if month in date and note['user_id'] is int(logged_in_user):
+                notes.append(note)
+        return notes
+    
+    def get_specific_notes_by_date(self, date, logged_in_user):
+        self.get_data()
+        notes = []
+        for note in self.existing_notes:
+            dates = note['created_at'].split(" ")
+            if dates[0] == date and note['user_id'] is int(logged_in_user):
+                notes.append(note)
+        return notes
+    
+    def return_dates(self, logged_user):
+        self.get_data()
+        dates = []
+        for note in self.existing_notes:
+            if note['user_id'] == int(logged_user):
+                date = note['created_at'].split(" ")
+                if date[0] != dates:
+                    dates.append(date[0])
+        return dates
 
     def delete_note(self, note_id):
         self.get_data()

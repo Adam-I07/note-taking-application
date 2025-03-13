@@ -3,6 +3,7 @@ import notes_application.add_note
 import notes_application.view_notes
 import notes_application.delete_note
 import notes_application.edit_note
+import notes_application.filter_notes
 
 class NotesInterface():
     def __init__(self):
@@ -30,7 +31,9 @@ class NotesInterface():
                 self.delete_note_instance.delete_note(self.logged_in_user)
                 self.menu_options()
             elif user_option == "5":
-                print("Filter Notes")
+                self.filter_notes_instance = notes_application.filter_notes.FilterNotes()
+                self.filter_notes_instance.filter_note(self.logged_in_user)
+                self.menu_options()
             elif user_option == "6":
                 print("---------------------")
                 print(Fore.GREEN + "Logged out" + Fore.WHITE)
