@@ -1,19 +1,23 @@
 from colorama import Fore
-import notes_application.notes_json_handling
 from tabulate import tabulate
+import requests
 
 class NotesValidation():
     def __init__(self):
-        self.notes_json_handling_instance = notes_application.notes_json_handling.NotesJsonHandling()
+        pass
 
     def select_note_to_edit(self, user_logged_in):
-        notes_can_be_edited = self.notes_json_handling_instance.get_user_specific_notes_id(user_logged_in)
+        url = f'http://127.0.0.1:8000/notes/existing/user/{user_logged_in}'
+        response = requests.get(url)
+        notes_can_be_edited = response.json()
         while True:
             user_input = input("Enter the id of the note you would like to edit, or 'b' to go back to Main Menu: ")
             check_input_type = self.check_user_input_type(user_input)
             if check_input_type == "int":
                 if int(user_input) in notes_can_be_edited:
-                    note = self.notes_json_handling_instance.get_specific_note(int(user_input))
+                    url_edit = f'http://127.0.0.1:8000/notes/existing/selected/note/{int(user_input)}'
+                    response_edit = requests.get(url_edit)
+                    note = response_edit.json()
                     return note
                 else:
                     print(Fore.RED + "You have entered an invalid ID! Try again!" + Fore.WHITE)
@@ -34,7 +38,9 @@ class NotesValidation():
                 print(Fore.RED + "Invalid Input! You can only enter y for yes or n for no! Try Again!"+ Fore.WHITE)
 
     def select_note_to_delete(self, user_logged_in):
-        notes_can_be_deleted_id = self.notes_json_handling_instance.get_user_specific_notes_id(user_logged_in)
+        url = f'http://127.0.0.1:8000/notes/existing/user/{user_logged_in}'
+        response = requests.get(url)
+        notes_can_be_deleted_id = response.json()
         while True:
             user_input = input("Enter the id of the note you would like to delete, or 'b' to go back to Main Menu: ")
             check_input_type = self.check_user_input_type(user_input)
@@ -54,9 +60,14 @@ class NotesValidation():
         while True:
             user_final_choice = input(f"Are you sure you would permanently delete note {delete_note_id}? (y/n) ")
             if user_final_choice.lower() == 'y':
-                self.notes_json_handling_instance.delete_note(delete_note_id)
-                print(Fore.GREEN + f"{delete_note_id} has been deleted successfully!" + Fore.WHITE)
-                return
+                url = f'http://127.0.0.1:8000/notes/remove/{delete_note_id}'
+                response = requests.delete(url)
+                delete_response = response.json()
+                if delete_response == "Successfully Deleted":
+                    print(Fore.GREEN + f"{delete_note_id} has been deleted successfully!" + Fore.WHITE)
+                    return
+                else:
+                    print(Fore.RED + "Error! Unable to Delete Note!"+ Fore.WHITE)
             elif user_final_choice.lower() == 'n':
                 return
             else:
@@ -76,8 +87,10 @@ class NotesValidation():
         while True:
             user_input = input("Enter the title for you note: ")
             if user_input:
-                title_validity = self.notes_json_handling_instance.check_title(user_input)
-                if title_validity == False:
+                url_edit = f'http://127.0.0.1:8000/notes/existing/check/title/{user_input}'
+                response_edit = requests.get(url_edit)
+                response = response_edit.json()
+                if response == False:
                     return user_input
                 else:
                     print("---------------------")
@@ -95,7 +108,10 @@ class NotesValidation():
                 print(Fore.RED + "You must enter an input for the title! Try Again!" + Fore.WHITE)
 
     def get_next_id(self):
-        return self.notes_json_handling_instance.get_next_id()
+        url_edit = 'http://127.0.0.1:8000/notes/next/available/id'
+        response_edit = requests.get(url_edit)
+        response = response_edit.json()
+        return response
 
     def tags_validation(self):
         self.tag_options()
