@@ -1,20 +1,20 @@
-import notes_application.notes_validation 
-import notes_application.notes_json_handling
+import notes_application.notes_validation
 from colorama import Fore
 from datetime import datetime
+import requests
 
 
 class EditNote():
     def __init__(self):
         self.notes_validation_instance = notes_application.notes_validation.NotesValidation()
-        self.notes_json_handling_instance = notes_application.notes_json_handling.NotesJsonHandling()
 
     def edit_note(self, logged_in_user):
         self.edit_note_menu()
-        data = self.notes_json_handling_instance.get_display_user_notes(logged_in_user) 
+        url_display = f'http://127.0.0.1:8000/notes/user/specific/{logged_in_user}'
+        response_display = requests.get(url_display)
+        data = response_display.json()
         self.notes_validation_instance.create_table(data)
         note = self.notes_validation_instance.select_note_to_edit(logged_in_user)
-        print(note)
         if note == 'back':
             return
         title = self.edit_title(note['title'])
@@ -23,15 +23,22 @@ class EditNote():
         note['content'] = content
         tags = self.edit_tags(note['tags'])
         note['tags'] = tags
-        date_format = '%d/%m/%Y %H:%M:%S'
+        date_format = '%d-%m-%Y %H:%M:%S'
         current_date_time = datetime.now().strftime(date_format)
         note['updated_at'] = current_date_time
         confirmation = self.notes_validation_instance.confirm_edit()
         if confirmation == True:
-            self.notes_json_handling_instance.edit_note(note) 
+            print(note)
+            note_id = note['id']
+            url_edit = f"http://127.0.0.1:8000/notes/edit/{note_id}"
+            response_edit = requests.put(url_edit, json=note)
+            data = response_edit.json()
             print("---------------------")
-            print(Fore.GREEN + "Note Successfully Edited!" + Fore.WHITE)
-            return
+            if data == "Successfully Updated":
+                print(Fore.GREEN + "Note Successfully Edited!" + Fore.WHITE)
+                return
+            else:
+                print(Fore.RED + "Error could not update note!" + Fore.WHITE)
         else:
             return
 

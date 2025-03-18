@@ -1,19 +1,23 @@
-import notes_application.notes_json_handling
 import notes_application.notes_validation
 from colorama import Fore
+import requests
 
 class FilterNotesBackend():
     def __init__(self):
-        self.notes_json_handling_instance = notes_application.notes_json_handling.NotesJsonHandling()
         self.notes_validation_instance = notes_application.notes_validation.NotesValidation()
 
     def filter_by_tags(self, logged_in_user):
         tag_selected = self.select_tag()
-        data = self.notes_json_handling_instance.filter_by_tag(tag_selected, logged_in_user)
-        if data:
+        url = f'http://127.0.0.1:8000/notes/existing/tag/specific/{tag_selected}/{logged_in_user}'
+        response = requests.get(url)
+        data = response.json()
+        try:
+            if "Did not find any notes with the selected tag" == data['detail']:
+                print("---------------------")
+                print(Fore.RED + "No note with the tag selected exist!" + Fore.WHITE)
+        except:
             self.notes_validation_instance.create_table(data)
-        else:
-            print(Fore.RED + "No note with the tag selected exist!" + Fore.WHITE)
+            
 
     def select_tag(self):
         tag_options = ["work", "personal", "school", "shopping", "travel", "health", "finance", "ideas", "recipes", "urgent", "important", "todo", "done", "in-progress"]
@@ -40,12 +44,17 @@ class FilterNotesBackend():
         while True:
             user_input = input("Enter the phrase or word you want to filter by: ")
             if user_input:
-                data = self.notes_json_handling_instance.filter_by_phrase(user_input, filter_choice, logged_in_user)
-                if data:
+                url = f'http://127.0.0.1:8000/notes/existing/phrase/specific/{user_input}/{filter_choice}/{logged_in_user}'
+                response = requests.get(url)
+                data = response.json()
+                try:
+                    if "Did not find any notes containing the word/phrase entered" == data['detail']:
+                        print("---------------------")
+                        print(Fore.RED + f"No content containing {user_input} could be found!, try again!" + Fore.WHITE)
+                        print("---------------------")
+                except:
                     self.notes_validation_instance.create_table(data)
                     return
-                else:
-                    print(Fore.RED + f"No content containing {user_input} could be found!" + Fore.WHITE)
             else:
                 print(Fore.RED + "You must enter an input phrase or work!" + Fore.WHITE)
 
@@ -63,7 +72,9 @@ class FilterNotesBackend():
                 print(Fore.RED + "You have entered an invalid input! Try again!" + Fore.WHITE)
 
     def select_year(self, logged_in_user):
-        dates = self.notes_json_handling_instance.return_dates(logged_in_user)
+        url_dates = f'http://127.0.0.1:8000/notes/existing/created-date/{logged_in_user}'
+        response_dates = requests.get(url_dates)
+        dates = response_dates.json()
         years = self.convet_date_to_year(dates)
         self.print_dates(years)
         while True:
@@ -72,26 +83,33 @@ class FilterNotesBackend():
             check = self.notes_validation_instance.check_user_input_type(user_input)
             if check == 'int':
                 if int(user_input) > 0 and int(user_input) <= len(years):
-                    data = self.notes_json_handling_instance.get_specific_notes_by_years(years[int(user_input)-1], logged_in_user)
-                    self.notes_validation_instance.create_table(data)
-                    return
-                else:
-                    print(Fore.RED + "Invalid year entered! Only enter a valid numerical value assosicated with a year!")
+                    url = f'http://127.0.0.1:8000/notes/existing/year/specific/{years[int(user_input)-1]}/{logged_in_user}'
+                    response = requests.get(url)
+                    data = response.json() 
+                    try:
+                        if "Did not find any notes in year for user" == data['detail']:
+                            print("---------------------")
+                            print(Fore.RED + "Invalid year entered! Only enter a valid numerical value assosicated with a year!" + Fore.WHITE)
+                            print("---------------------")
+                    except:
+                        self.notes_validation_instance.create_table(data)
+                        return
             else:
                 print(Fore.RED + "Invalid input enter a valid numerical input!" + Fore.WHITE)
-
 
     def convet_date_to_year(self, dates):
         years = []
         for date in dates:
-            split_date = date.split("/")
+            split_date = date.split("-")
             year = split_date[2]
             if year not in years:
                 years.append(year)
         return years
 
     def select_month(self, logged_in_user):
-        dates = self.notes_json_handling_instance.return_dates(logged_in_user)
+        url_dates = f'http://127.0.0.1:8000/notes/existing/created-date/{logged_in_user}'
+        response_dates = requests.get(url_dates)
+        dates = response_dates.json() 
         months = self.convert_date_to_month(dates)
         self.print_dates(months)
         while True:
@@ -100,25 +118,33 @@ class FilterNotesBackend():
             check = self.notes_validation_instance.check_user_input_type(user_input)
             if check == 'int':
                 if int(user_input) > 0 and int(user_input) <= len(months):
-                    data = self.notes_json_handling_instance.get_specific_notes_by_month(months[int(user_input)-1], logged_in_user)
-                    self.notes_validation_instance.create_table(data)
-                    return
-                else:
-                    print(Fore.RED + "Invalid month entered! Only enter a valid numerical value assosicated with a month!" + Fore.WHITE)
+                    url = f'http://127.0.0.1:8000/notes/existing/month/specific/{months[int(user_input)-1]}/{logged_in_user}'
+                    response = requests.get(url)
+                    data = response.json() 
+                    try:
+                        if "Did not find any notes on month selected for user" == data['detail']:
+                            print("---------------------")
+                            print(Fore.RED + "Invalid month entered! Only enter a valid numerical value assosicated with a month!" + Fore.WHITE)
+                            print("---------------------")
+                    except:
+                        self.notes_validation_instance.create_table(data)
+                        return
             else:
                 print(Fore.RED + "Invalid input enter a valid numerical input!" + Fore.WHITE)
 
     def convert_date_to_month(self, dates):
         months = []
         for date in dates:
-            split_date = date.split("/")
-            month = f"{split_date[1]}/{split_date[2]}"
+            split_date = date.split("-")
+            month = f"{split_date[1]}-{split_date[2]}"
             if month not in months:
                 months.append(month)
         return months
 
     def select_day(self, logged_in_user):
-        dates = self.notes_json_handling_instance.return_dates(logged_in_user)
+        url_dates = f'http://127.0.0.1:8000/notes/existing/created-date/{logged_in_user}'
+        response_dates = requests.get(url_dates)
+        dates = response_dates.json() 
         self.print_dates(dates)
         while True:
             user_input = input("Enter numerical value assosciated with the date you would like to select: ")
@@ -126,11 +152,17 @@ class FilterNotesBackend():
             check = self.notes_validation_instance.check_user_input_type(user_input)
             if check == 'int':
                 if int(user_input) > 0 and int(user_input) <= len(dates):
-                    data = self.notes_json_handling_instance.get_specific_notes_by_date(dates[int(user_input)-1], logged_in_user)
-                    self.notes_validation_instance.create_table(data)
-                    return
-                else:
-                    print(Fore.RED + "Invalid date entered! Only enter a valid numerical value assosicated with a date!" + Fore.WHITE)
+                    url = f'http://127.0.0.1:8000/notes/existing/day/specific/{dates[int(user_input)-1]}/{logged_in_user}'
+                    response = requests.get(url)
+                    data = response.json() 
+                    try:
+                        if "Did not find any notes on selected date for user" == data['detail']:
+                            print("---------------------")
+                            print(Fore.RED + "Invalid date entered! Only enter a valid numerical value assosicated with a date!" + Fore.WHITE)
+                            print("---------------------")
+                    except:
+                        self.notes_validation_instance.create_table(data)
+                        return
             else:
                 print(Fore.RED + "Invalid input enter a valid numerical input!" + Fore.WHITE)
 

@@ -1,12 +1,11 @@
 import notes_application.notes_validation
 from datetime import datetime
-import notes_application.notes_json_handling
 from colorama import Fore
+import requests
 
 class AddNote():
     def __init__(self):
         self.notes_validation_instance = notes_application.notes_validation.NotesValidation()
-        self.notes_json_handling_instance = notes_application.notes_json_handling.NotesJsonHandling()
 
     def add_new_note(self, user_id):
         note = {"id" : "", "user_id" : "", "title" : "", "content" : "", "tags" : "", "created_at" : "", "updated_at": ""}
@@ -19,16 +18,21 @@ class AddNote():
         note["content"] = content
         tags = self.notes_validation_instance.tags_validation()
         note["tags"] = tags
-        date_format = '%d/%m/%Y %H:%M:%S'
+        date_format = '%d-%m-%Y %H:%M:%S'
         current_date_time = datetime.now().strftime(date_format)
         note["created_at"] = current_date_time
         note["updated_at"] = current_date_time
         confirmation = self.notes_validation_instance.confirm_save()
         if confirmation == True:
-            self.notes_json_handling_instance.add_new_note(note) 
+            url = "http://127.0.0.1:8000/notes/create"
+            response_edit = requests.post(url, json=note)
+            data = response_edit.json()
             print("---------------------")
-            print(Fore.GREEN + "Note Successfully Saved!" + Fore.WHITE)
-            return
+            if data == "Successfully Saved":
+                print(Fore.GREEN + "Note Successfully Saved!" + Fore.WHITE)
+                return
+            else:
+                print(Fore.RED + "Error could add note!" + Fore.WHITE)
         else:
             return
 
