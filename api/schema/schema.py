@@ -9,8 +9,6 @@ class Note(BaseModel):
     created_at: str
     updated_at: str
 
-class EditNote(BaseModel):
-    title: str
-    content: str
-    tags: list
-    updated_at: str
+class UserCredentials(BaseModel):
+    username: str
+    password: str

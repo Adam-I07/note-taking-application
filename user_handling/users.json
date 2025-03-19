@@ -18,5 +18,10 @@
         "id": 4,
         "username": "user4",
         "password": "$argon2id$v=19$m=65536,t=3,p=4$3ax5TAp7XhECiZGPVFFZIg$yN4D1CFeDmBoUekOu09zSVDHWtDSwqhOLQ7BnTjC118"
+    },
+    {
+        "id": 5,
+        "username": "user5",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$GYHNzJQ1+rHbS8OV7kD4Gg$AONnUYqZmn3z59Bmf7HjGrYSbFu4Pt8ea9E3g2juYVo"
     }
 ]

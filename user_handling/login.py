@@ -1,19 +1,16 @@
 import user_handling.user_validation as user_validation
-import user_handling.user_json_handling as user_json_handling
 import notes_application.notes_interface as notes_interface
 from colorama import Fore
+import requests
 
 class Login():
     def __init__(self):
         self.user_validation_instance = user_validation.UserValidation()
-        self.user_json_handling_instance = user_json_handling.UserJsonHandling()
     
     def login(self):
         print("---------------------")
         print("Login")
         print("---------------------")
-
-        
         while True:
             username_inputted = self.username_input()
             if username_inputted == 'b':
@@ -21,21 +18,22 @@ class Login():
             password_inputted = self.password_input()
             if password_inputted == 'b':
                 return
-            credentials_check = self.user_json_handling_instance.login(f"{username_inputted},{password_inputted}")
-            credential_split = credentials_check.split(",")
-            credentials_status = credential_split[0]
-            extra_information = credential_split[1]
-            if credentials_status == 'invalid':
-                if extra_information == 'password':
+            
+            credentials = {"username": f"{username_inputted}", "password": f"{password_inputted}"}
+            url = f"http://127.0.0.1:8000/auth/check/login"
+            response = requests.post(url, json=credentials)
+            check = response.json()
+            check_split = check['detail'].split(" ")
+            if check_split[0] == 'Invalid':
+                if check_split[1] == 'password':
                     print(Fore.RED + "Invalid Password! Try Again" + Fore.WHITE)
-                
-                if extra_information == 'username':
+                if check_split[1] == 'username':
                     print(Fore.RED + "Invalid Username Try Again" + Fore.WHITE)
             else:
                 print("---------------------")
                 print(Fore.GREEN + "Successfully Logged In!" + Fore.WHITE)
                 notes_interface_instance = notes_interface.NotesInterface()
-                notes_interface_instance.logged_in(extra_information)
+                notes_interface_instance.logged_in(check_split[1])
                 return
 
 

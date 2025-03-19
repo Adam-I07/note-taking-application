@@ -12,6 +12,13 @@ class FilterNotesBackend():
         response = requests.get(url)
         data = response.json()
         try:
+            if data['detail'] == "Did not find any notes with the selected tag":
+                print("---------------------")
+                print(Fore.YELLOW + "You currently have no notes created, first create notes to filter them!" + Fore.WHITE)
+                return
+        except:
+            pass
+        try:
             if "Did not find any notes with the selected tag" == data['detail']:
                 print("---------------------")
                 print(Fore.RED + "No note with the tag selected exist!" + Fore.WHITE)
@@ -48,6 +55,13 @@ class FilterNotesBackend():
                 response = requests.get(url)
                 data = response.json()
                 try:
+                    if data['detail'] == "Did not find any notes containing the word/phrase entered":
+                        print("---------------------")
+                        print(Fore.YELLOW + "You currently have no notes created, first create notes to filter them!" + Fore.WHITE)
+                        return
+                except:
+                    pass
+                try:
                     if "Did not find any notes containing the word/phrase entered" == data['detail']:
                         print("---------------------")
                         print(Fore.RED + f"No content containing {user_input} could be found!, try again!" + Fore.WHITE)
@@ -75,6 +89,13 @@ class FilterNotesBackend():
         url_dates = f'http://127.0.0.1:8000/notes/existing/created-date/{logged_in_user}'
         response_dates = requests.get(url_dates)
         dates = response_dates.json()
+        try:
+            if dates['detail'] == "Did not find any dates":
+                print("---------------------")
+                print(Fore.YELLOW + "You currently have no notes created, first create notes to filter them!" + Fore.WHITE)
+                return
+        except:
+            pass
         years = self.convet_date_to_year(dates)
         self.print_dates(years)
         while True:
@@ -110,6 +131,13 @@ class FilterNotesBackend():
         url_dates = f'http://127.0.0.1:8000/notes/existing/created-date/{logged_in_user}'
         response_dates = requests.get(url_dates)
         dates = response_dates.json() 
+        try:
+            if dates['detail'] == "Did not find any dates":
+                print("---------------------")
+                print(Fore.YELLOW + "You currently have no notes created, first create notes to filter them!" + Fore.WHITE)
+                return
+        except:
+            pass
         months = self.convert_date_to_month(dates)
         self.print_dates(months)
         while True:
@@ -145,6 +173,13 @@ class FilterNotesBackend():
         url_dates = f'http://127.0.0.1:8000/notes/existing/created-date/{logged_in_user}'
         response_dates = requests.get(url_dates)
         dates = response_dates.json() 
+        try:
+            if dates['detail'] == "Did not find any dates":
+                print("---------------------")
+                print(Fore.YELLOW + "You currently have no notes created, first create notes to filter them!" + Fore.WHITE)
+                return
+        except:
+            pass
         self.print_dates(dates)
         while True:
             user_input = input("Enter numerical value assosciated with the date you would like to select: ")

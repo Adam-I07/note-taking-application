@@ -13,6 +13,13 @@ class EditNote():
         url_display = f'http://127.0.0.1:8000/notes/user/specific/{logged_in_user}'
         response_display = requests.get(url_display)
         data = response_display.json()
+        try:
+            if data['detail'] == "User with ID does not have notes":
+                print(Fore.YELLOW + "You currently have no notes created, first create notes to edit them!" + Fore.WHITE)
+                return
+        except:
+            pass
+        print(Fore.YELLOW + "Info: when you select edit a secton of the note you have to enter new input previous input will be removed." + Fore.WHITE)
         self.notes_validation_instance.create_table(data)
         note = self.notes_validation_instance.select_note_to_edit(logged_in_user)
         if note == 'back':
@@ -46,8 +53,7 @@ class EditNote():
         print("---------------------")
         print("Edit Note")
         print("---------------------")
-        print(Fore.YELLOW + "Info: when you select edit a secton of the note you have to enter new input previous input will be removed." + Fore.WHITE)
-
+        
     def edit_title(self, title):
         while True:
             user_input = input(f"The current title entered is '{title}' would you like to edit and enter a new title? (y/n): ")

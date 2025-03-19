@@ -1,11 +1,10 @@
 import user_handling.user_validation as user_validation
-import user_handling.user_json_handling as user_json_handling
 from colorama import Fore
+import requests
 
 class Register():
     def __init__(self):
         self.user_validation_instance = user_validation.UserValidation()
-        self.user_json_handling_instance = user_json_handling.UserJsonHandling()
 
     def start_registration(self):
         print("---------------------")
@@ -17,9 +16,15 @@ class Register():
         password_inputted = self.password_input()
         if password_inputted == 'b':
                 return
-        self.user_json_handling_instance.register_user(f"{username_inputted},{password_inputted}")
+        credentials = {"username": f"{username_inputted}", "password": f"{password_inputted}"}
+        url = f"http://127.0.0.1:8000/auth/register"
+        response = requests.post(url, json=credentials)
+        check = response.json()
         print("---------------------")
-        print(f"{username_inputted} successfully registered!")
+        if check['detail'] == "Successfully Registered":
+            print(f"{username_inputted} successfully registered!")
+        else:
+            print(Fore.RED + "Error! Unable to register user, try again!" + Fore.WHITE)
         return
 
     def password_input(self):
