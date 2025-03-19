@@ -1,8 +1,9 @@
-import user_handling.user_json_handling as user_json_handling
+
+import requests
+
 class UserValidation():
     def __init__(self):
-        self.user_json_handling_instance = user_json_handling.UserJsonHandling()
-
+        pass
     def check_input(self, input):
         if input:
             return True
@@ -45,7 +46,9 @@ class UserValidation():
         return False
 
     def check_username_exists(self, input):
-        check = self.user_json_handling_instance.check_username(input)
+        url = f"http://127.0.0.1:8000/auth/check/username/{input}"
+        response = requests.get(url)
+        check = response.json()
         if check is True:
             return True
         else:
