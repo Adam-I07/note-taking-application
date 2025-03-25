@@ -22,7 +22,7 @@ class Register():
         check = response.json()
         print("---------------------")
         if check['detail'] == "Successfully Registered":
-            print(f"{username_inputted} successfully registered!")
+            print(Fore.GREEN + f"{username_inputted} successfully registered!" + Fore.WHITE)
         else:
             print(Fore.RED + "Error! Unable to register user, try again!" + Fore.WHITE)
         return
