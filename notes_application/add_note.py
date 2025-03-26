@@ -28,7 +28,7 @@ class AddNote():
             response_edit = requests.post(url, json=note)
             data = response_edit.json()
             print("---------------------")
-            if data == "Successfully Saved":
+            if data == "created note":
                 print(Fore.GREEN + "Note Successfully Saved!" + Fore.WHITE)
                 return
             else:
