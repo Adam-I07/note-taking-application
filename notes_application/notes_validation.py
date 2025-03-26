@@ -64,6 +64,7 @@ class NotesValidation():
                 response = requests.delete(url)
                 delete_response = response.json()
                 if delete_response == "Successfully Deleted":
+                    print("---------------------")
                     print(Fore.GREEN + f"{delete_note_id} has been deleted successfully!" + Fore.WHITE)
                     return
                 else:
@@ -174,7 +175,8 @@ class NotesValidation():
 
     def create_table(self, data):
         try:
-            print(tabulate(data, headers='keys', tablefmt='grid'))
+            headers_use = ["ID", "User ID", "Title", "Content", "Tags", "Created At", "Updated At"]
+            print(tabulate(data, headers=headers_use, tablefmt="grid"))
         except:
             print(Fore.RED + "Error, Could not create table from given data!" + Fore.WHITE)
 

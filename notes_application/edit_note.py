@@ -21,9 +21,18 @@ class EditNote():
             pass
         print(Fore.YELLOW + "Info: when you select edit a secton of the note you have to enter new input previous input will be removed." + Fore.WHITE)
         self.notes_validation_instance.create_table(data)
-        note = self.notes_validation_instance.select_note_to_edit(logged_in_user)
-        if note == 'back':
+        notes = self.notes_validation_instance.select_note_to_edit(logged_in_user)
+        if notes == 'back':
             return
+        note = {"id" : "", "user_id" : "", "title" : "", "content" : "", "tags" : "", "created_at" : "", "updated_at": ""}
+        for n in notes:
+            note['id'] = n[0]
+            note['user_id'] = n[1]
+            note['title'] = n[2]
+            note['content'] = n[3]
+            note['tags'] = n[4]
+            note['created_at'] = n[5]
+            note['updated_at'] = n[6]
         title = self.edit_title(note['title'])
         note['title'] = title
         content = self.edit_content(note['content'])
@@ -35,13 +44,11 @@ class EditNote():
         note['updated_at'] = current_date_time
         confirmation = self.notes_validation_instance.confirm_edit()
         if confirmation == True:
-            print(note)
-            note_id = note['id']
-            url_edit = f"http://127.0.0.1:8000/notes/edit/{note_id}"
+            url_edit = f"http://127.0.0.1:8000/notes/edit"
             response_edit = requests.put(url_edit, json=note)
             data = response_edit.json()
             print("---------------------")
-            if data == "Successfully Updated":
+            if data == "updated note":
                 print(Fore.GREEN + "Note Successfully Edited!" + Fore.WHITE)
                 return
             else:
